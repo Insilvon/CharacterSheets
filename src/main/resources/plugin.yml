@@ -1,5 +1,10 @@
-name: Character Sheets
+name: CharacterSheets
 version: ${project.version}
 main: me.aetheria.playerdescriptions.PlayerDescriptions
 authors: [Insilvon]
 description: Creates and edits Character Sheets
+commands:
+  CharacterSheet:
+    description: runs the default command test.
+    usage: /cs
+    aliases: [cs, char, sheet]
