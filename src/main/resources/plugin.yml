@@ -1,0 +1,5 @@
+name: Character Sheets
+version: ${project.version}
+main: me.aetheria.playerdescriptions.PlayerDescriptions
+authors: [Insilvon]
+description: Creates and edits Character Sheets
