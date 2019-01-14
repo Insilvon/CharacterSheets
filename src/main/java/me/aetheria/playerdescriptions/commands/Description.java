@@ -57,7 +57,7 @@ public class Description implements CommandExecutor {
         }
         return true;
     }
-    private void setDesc(String uuid, String data){
+    public void setDesc(String uuid, String data){
         File file = new File("plugins"+File.separator+"CharacterSheets"+File.separator+"Players"+File.separator+uuid+".yml");
         FileConfiguration fc = YamlConfiguration.loadConfiguration(file);
         fc.set("Player.Desc", data);
@@ -67,12 +67,12 @@ public class Description implements CommandExecutor {
             e.printStackTrace();
         }
     }
-    private void addDesc(String uuid, String data){
+    public void addDesc(String uuid, String data){
         String original = readDesc(uuid);
         original += " "+data;
         setDesc(uuid, original);
     }
-    private String readDesc(String uuid){
+    public String readDesc(String uuid){
         File file = new File("plugins"+File.separator+"CharacterSheets"+File.separator+"Players"+File.separator+uuid+".yml");
         FileConfiguration fc = YamlConfiguration.loadConfiguration(file);
         String data = fc.getString("Player.Desc");

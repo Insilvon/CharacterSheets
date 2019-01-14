@@ -9,27 +9,38 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Main class for the CharacterSheets plugin
+ */
 public final class CharacterSheets extends JavaPlugin implements Listener {
 
     @Override
+    /**
+     * Default Plugin Setup
+     */
     public void onEnable() {
-        // Plugin startup logic
         System.out.println("[Character Sheets] Starting up!");
+
+        //Get Commands
         getCommand("CharacterSheet").setExecutor(new CharacterSheet());
         getCommand("Description").setExecutor(new Description());
 
+        //Setup default config
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
+        //Setup the Players Directory, if none exists
         File testDir = new File(getDataFolder()+File.separator+"Players");
         if(!(testDir.exists())) testDir.mkdir();
 
+        //Get Events
         getServer().getPluginManager().registerEvents(this,this);
     }
     @EventHandler
@@ -52,9 +63,25 @@ public final class CharacterSheets extends JavaPlugin implements Listener {
             }
         }
     }
+    @EventHandler
+    /**
+     * Fires when a player right-clicks another player
+     */
+    public void onSneakRC(PlayerInteractEntityEvent e){
+        Player player = e.getPlayer();
+        if (e.getRightClicked() instanceof Player){
+            Player clicked = (Player) e.getRightClicked();
+            String uuid = clicked.getUniqueId().toString();
+            Description loadClass = new Description();
+            player.sendMessage(loadClass.readDesc(uuid));
+        }
+    }
     @Override
+    /**
+     * Plugin Disable Shutdown Logic
+     */
     public void onDisable() {
-        // Plugin shutdown logic
+        System.out.println("[Character Sheets] Shutting down!");
     }
 
 //    @Override
