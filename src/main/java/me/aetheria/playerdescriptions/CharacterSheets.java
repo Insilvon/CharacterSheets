@@ -15,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.io.IOException;
 
-public final class PlayerDescriptions extends JavaPlugin implements Listener {
+public final class CharacterSheets extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
@@ -33,12 +33,17 @@ public final class PlayerDescriptions extends JavaPlugin implements Listener {
         getServer().getPluginManager().registerEvents(this,this);
     }
     @EventHandler
+    /**
+     * Generates a new UUID.YML file for an incoming player.
+     * Default items: Player: Name, Description. (FIND A WAY TO LOOK IN SKILLAPI?)
+     */
     public void onJoin(PlayerJoinEvent event){
         File myFile = new File(getDataFolder()+ File.separator + "Players" + File.separator + event.getPlayer().getUniqueId().toString()+".yml");
         if (!myFile.exists()) {
             try {
                 myFile.createNewFile();
                 FileConfiguration fc = YamlConfiguration.loadConfiguration(myFile);
+                //SET DEFAULT ITEMS HERE
                 fc.set("Player.Name", event.getPlayer().getDisplayName());
                 fc.set("Player.Desc", "Basic Description!");
                 fc.save(myFile);
