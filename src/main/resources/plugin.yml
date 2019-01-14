@@ -8,3 +8,7 @@ commands:
     description: runs the default command test.
     usage: /cs
     aliases: [cs, char, sheet]
+  Description:
+    description: tests your description
+    usage: /Description
+    aliases: [desc, Desc, description]

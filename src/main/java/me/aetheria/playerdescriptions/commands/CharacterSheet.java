@@ -10,7 +10,10 @@ public class CharacterSheet implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (!(sender instanceof Player)) System.out.println("Please run this as a player.");
+        if (!(sender instanceof Player)) {
+            System.out.println("Please run this as a player.");
+            return false;
+        }
         Player player = (Player) sender;
         if (args.length>0){
             player.sendMessage(args[0]);
